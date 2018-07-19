@@ -8,8 +8,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
 import 'rxjs/add/observable/throw';
-
-import { Profile } from '../../models/profile.interface';
 /*
   Generated class for the ProfileServiceProvider provider.
 
@@ -27,13 +25,8 @@ export class ProfileServiceProvider {
     console.log('Hello ProfileServiceProvider Provider');
   }
 
-  profileInfo(token: any){
-    this.token = `Bearer ${token}`;
-
-
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', this.token);
+  profileInfo(token: string){
+    const headers = this.headers(token);
 
     const options = new RequestOptions({ headers: headers});
 
@@ -43,6 +36,17 @@ export class ProfileServiceProvider {
       .map(this.extractData)
       .do(this.logData)
       .catch(this.handleError)
+  }
+
+  headers(token: string){
+    this.token = `Bearer ${token}`;
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.token);
+    
+    return headers;
+
   }
 
   private handleError(error: Response | any) {

@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   getProfile(token: any) {
-    console.log(token)
+    // console.log(token)
     this.profileService.profileInfo(token).subscribe((data: Profile) => console.log(data), error => console.log(error))
   }
 

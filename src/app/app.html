@@ -1,1 +1,41 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+    <!-- <ion-header color="primary">
+        <ion-toolbar>
+            <ion-title>Clinic</ion-title>
+        </ion-toolbar>
+    </ion-header> -->
+
+    <ion-content>
+        <span *ngIf="info != undefined && photoUrl != undefined else second">
+            <div class="app-profile-details half-bg" text-center style="background-color: #488aff">
+                <div class="pic">
+                    <img alt="" [src]="photoUrl">
+                    <!-- <ion-badge class="badge badge-md">.</ion-badge> -->
+                </div>
+                    <h5 class="text-title" capitalize>{{info.nama}}</h5>
+                    <span class="text-title">email@example</span>
+            </div>
+        </span>
+
+        <ng-template #second>
+            <div class="app-profile-details half-bg" text-center style="background-color: #488aff">
+                <div class="pic">
+                    <img alt="" src="">
+                    <!-- <ion-badge class="badge badge-md">.</ion-badge> -->
+                </div>
+                <h5 class="text-title" capitalize>No Name</h5>
+                <span class="text-title">-</span>
+            </div>
+        </ng-template>
+
+        <ion-list>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

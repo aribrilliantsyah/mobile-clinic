@@ -5,6 +5,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { Profile } from '../../models/profile.interface';
 import { ToastServiceProvider } from '../../providers/toast-service/toast-service';
 import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
+import { Events } from 'ionic-angular';
 
 
 /**
@@ -23,7 +24,7 @@ export class LoginPage {
   user: User = {
     username: '',
     password: '',
-  }
+  } 
   validateErrors: any;
   profile: Profile;
   constructor(
@@ -32,6 +33,7 @@ export class LoginPage {
     private auth: AuthServiceProvider,
     private toast: ToastServiceProvider,
     private loading: LoadingServiceProvider, 
+    private events: Events,
   ) { }
 
   ionViewDidLoad() {
@@ -61,10 +63,17 @@ export class LoginPage {
 
   authSuccess(data){
     // console.log(data)
-    this.navCtrl.push('IndexProfilePage',{
+    this.navCtrl.setRoot('HomePage',{
       profile : data.data,
       token   : data.token,
     });
+    this.logUser(data.token, data.data)
+    
+  }
+
+  logUser(token,data) {
+    console.log('User Loged!')
+    this.events.publish('user:loged', token , data);
   }
 
   resetValidation(type: string): void {

@@ -5,15 +5,6 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { Profile } from '../../models/profile.interface';
 import { ToastServiceProvider } from '../../providers/toast-service/toast-service';
 import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
-import { Events } from 'ionic-angular';
-
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,55 +16,38 @@ export class LoginPage {
     username: '',
     password: '',
   } 
+  page: string = '';
   validateErrors: any;
   profile: Profile;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams, 
     private auth: AuthServiceProvider,
-    private toast: ToastServiceProvider,
     private loading: LoadingServiceProvider, 
-    private events: Events,
+    private toast: ToastServiceProvider,
   ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('Login Page');
+    this.page = this.navParams.get('page');
   }
 
   logIn(): void {
     let loader = this.loading.show('loading ....');
     loader.present();
     this.resetValidation('');
-    this.auth.AuthUser(this.user)
-      .subscribe((data: Profile) => this.authSuccess(data), error => this.authFailed(error));
+    this.auth.AuthUser(this.user).subscribe((data: Profile) => this.auth.authSuccess(data,this.page), error => this.getError(error))
     loader.dismiss();
   }
 
-  authFailed(error: any){
-    console.log(error)
-    if(error.status == 422){
-      this.validateErrors = error.json();  
-    }else if(error.status == 400){
+  getError(error: any) {
+    if (error.status == 422) {
+      this.validateErrors = error.json();
+    } else if (error.status == 400) {
       this.toast.show(error.json().error);
-    }else{
-      console.log(error.json());
+    } else {
       this.toast.show('Server Error');
     }
-  }
-
-  authSuccess(data){
-    // console.log(data)
-    this.navCtrl.setRoot('HomePage',{
-      profile : data.data,
-      token   : data.token,
-    });
-    this.logUser(data.token, data.data)
-    
-  }
-
-  logUser(token,data) {
-    console.log('User Loged!')
-    this.events.publish('user:loged', token , data);
   }
 
   resetValidation(type: string): void {
@@ -92,6 +66,5 @@ export class LoginPage {
           break;
       }
     }
-    // this.validateErrors = undefined;
   }
 }

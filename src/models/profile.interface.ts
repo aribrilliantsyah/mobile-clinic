@@ -5,8 +5,10 @@ export interface Profile {
     title_id: number;
     title: string;
     nama: string;
-    jenis_kelamin: string;
-    kewarganegaraan: string;
+    jenis_kelamin: number;
+    jenis_kelamin_label: string;
+    kewarganegaraan: number;
+    kewarganegaraan_label: string;
     alamat: string;
     provinsi_id: number;
     provinsi: string;
@@ -22,6 +24,7 @@ export interface Profile {
     no_identitas: string;
     no_telepon_1: string;
     no_telepon_2: string;
+    tempat_lahir_id: number;
     tempat_lahir: string;
     tgl_lahir: string;
     gol_darah_id: number;
@@ -29,6 +32,7 @@ export interface Profile {
     agama_id: number;
     agama: string;
     suku: string;
+    umur: string;
     status_kawin_id: number;
     status_kawin: string;
     pendidikan_id: number;

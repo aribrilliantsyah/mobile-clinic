@@ -1,0 +1,35 @@
+user-profile {
+    .card-title-md,
+    .card-title-ios,
+    .card-title-wp {
+        font-size: 13px;
+        padding: 0;
+        color: black;
+    }
+    .card-md p,
+    .card-ios p,
+    .card-wp p {
+        font-size: 12px;
+    }
+    .card-content-md,
+    .card-content-ios,
+    .card-content-wp {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .card-lg {
+        padding: 11px 0;
+    }
+    .custom-header {
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-bottom: 8px;
+    }
+    .custom-header-title {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    hr{
+        height: 2px;
+    }
+}

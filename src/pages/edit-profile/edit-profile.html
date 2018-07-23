@@ -3,16 +3,16 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-title>Ubah Profile</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <user-profile [profile]="profile"></user-profile>
+  <profile-edit-form [profile]="profile"></profile-edit-form>
   <ion-fab right bottom>
-    <button ion-fab mini (click)="edit()">
-      <ion-icon name="create"></ion-icon>
+    <button ion-fab mini (click)="save()">
+      <ion-icon name="checkmark-circle"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

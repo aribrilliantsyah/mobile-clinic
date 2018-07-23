@@ -10,25 +10,27 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
 
 import { User } from '../../models/user.interface';
-import { Profile } from '../../models/profile.interface';
+import { NavController, Events, App } from 'ionic-angular';
 
-/*
-  Generated class for the AuthServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthServiceProvider {
 
   private baseUrl: string = "http://clinic-api.apk";
   private authUrl: string = `${this.baseUrl}/v1/auth/login`;
+  private navCtrl: NavController;
+  private page: string;
 
-  constructor(private http: Http) {
-    console.log('Hello AuthServiceProvider Provider');
+  constructor(
+    private http: Http,
+    private events: Events,
+    private app: App,
+  ) {
+    console.log('Auth Providers');
+    this.navCtrl = app.getActiveNav();
   }
 
-  AuthUser(user: User): Observable<Profile>{
+  //send user
+  AuthUser(user: User){
 
     let formData:FormData = new FormData();
     formData.append('username', user.username);
@@ -40,6 +42,46 @@ export class AuthServiceProvider {
       .do(this.logData)
       .catch(this.handleError)
   }
+
+  //middleware
+  AuthCheck(token: string,page: string){
+    if(token == undefined && page != undefined){
+      this.redirectToLogin(page)
+    }
+  }
+
+
+  authSuccess(data,page) {
+    //redirect to defined page
+    this.page = page ? page : 'HomePage';
+    this.navCtrl.setRoot(this.page, {
+      profile: data.data,
+      token: data.token,
+    });
+
+    this.logUser(data.token, data.data)
+
+  }
+
+  authFailed(error: any) {
+    return error;
+  }
+
+  logUser(token, data) {
+    console.log('User Loged!')
+    this.events.publish('user:loged', token, data);
+  }
+
+  logOut(){
+    this.navCtrl.setRoot('HomePage')
+  }
+
+  redirectToLogin(page) {
+    this.navCtrl.setRoot('LoginPage',{
+      page: page,
+    })
+  }
+
   private handleError(error: Response | any) {
     return Observable.throw(error)
   }
@@ -51,5 +93,6 @@ export class AuthServiceProvider {
   private logData(response: Response) {
     console.log(response)
   }
+  
   
 }

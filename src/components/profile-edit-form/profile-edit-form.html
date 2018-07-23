@@ -1,0 +1,216 @@
+<div *ngIf="profile != undefined">
+  <!-- <div class="app-profile-details half-bg lg custom-card" text-center style="background-color: #488aff">
+    <div class="pic-lg">
+      <img alt="" [src]="profile.foto">
+
+    </div>
+  </div> -->
+
+  <ion-list>
+    <!-- <ion-card class="card-lg">
+      <div class="custom-header">
+        <span class="custom-header-title">No.RM</span>
+      </div>
+      <hr>
+      <ion-card-content>
+        {{profile.no_rekam_medis}}
+      </ion-card-content>
+    </ion-card> -->
+
+    <ion-card class="card-lg">
+      <div class="custom-header">
+        <span class="custom-header-title">Profile Lengkap</span>
+      </div>
+      <hr>
+      <ion-card-content>
+        <ion-card-title>
+          Nama
+        </ion-card-title>
+        <p>
+          {{profile.title}} {{profile.nama}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Jenis Kelamin
+        </ion-card-title>
+        <p>
+          {{profile.jenis_kelamin_label}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Agama
+        </ion-card-title>
+        <p>
+          {{profile.agama}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Kewarganegaraan
+        </ion-card-title>
+        <p>
+          {{profile.kewarganegaraan_label}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          No.Identitas
+        </ion-card-title>
+        <p>
+          {{profile.no_identitas}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Nomor HP
+        </ion-card-title>
+        <p>
+          {{profile.no_telepon_1}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Telepon
+        </ion-card-title>
+        <p>
+          {{profile.no_telepon_2}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Tempat Lahir
+        </ion-card-title>
+        <p>
+          {{profile.tempat_lahir}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Tanggal Lahir
+        </ion-card-title>
+        <p>
+          {{profile.tgl_lahir}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Umur
+        </ion-card-title>
+        <p>
+          {{profile.umur}} Th
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Golongan Darah
+        </ion-card-title>
+        <p>
+          {{profile.gol_darah}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Suku
+        </ion-card-title>
+        <p>
+          {{profile.suku}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Status Kawin
+        </ion-card-title>
+        <p>
+          {{profile.status_kawin}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Pendidikan
+        </ion-card-title>
+        <p>
+          {{profile.pendidikan}}
+        </p>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-title>
+          Pekerjaan
+        </ion-card-title>
+        <p>
+          {{profile.pekerjaan}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="card-lg">
+      <div class="custom-header">
+        <span class="custom-header-title">Alamat Lengkap</span>
+      </div>
+      <hr>
+      <ion-card-content>
+        <ion-card-title>
+          Alamat
+        </ion-card-title>
+        <p>
+          {{profile.alamat}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Kode Pos
+        </ion-card-title>
+        <p>
+          {{profile.kodepos}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Kelurahan/Desa
+        </ion-card-title>
+        <p>
+          {{profile.kelurahan}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Kecamatan
+        </ion-card-title>
+        <p>
+          {{profile.kecamatan}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Kabupaten/Kota
+        </ion-card-title>
+        <p>
+          {{profile.kabupaten}}
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          Provinsi
+        </ion-card-title>
+        <p>
+          {{profile.provinsi}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+</div>

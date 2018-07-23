@@ -1,19 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav , Platform, Events } from 'ionic-angular';
+import { Nav , Platform, Events, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  private baseUrl: string = 'http://clinic-api.apk';
-  private basePhotoUrl: string = `${this.baseUrl}/v1/profile/foto/`;
-  public photoUrl: string;
-
-  rootPage:string = 'LoginPage';
+  rootPage:string = 'HomePage';
   pages: Array<{ title: string, component: string, icon:string }>;
   
   token : string;
@@ -27,8 +22,7 @@ export class MyApp {
   ) {
     this.initializeApp();
     this.getAuth();
-    this.initPages();
-    console.log('img',this.photoUrl)
+    this.initPages(); 
   }
 
   initializeApp() {
@@ -43,25 +37,33 @@ export class MyApp {
   initPages(){
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: 'HomePage', icon: 'ion-home' },
-      { title: 'Profile', component: 'IndexProfilePage', icon: 'ion-user' },
+      { title: 'Home', component: 'HomePage', icon: 'home' },
+      { title: 'Profile', component: 'IndexProfilePage', icon: 'person' },
+      { title: 'SampleForm', component: 'SamplePage', icon: 'add' },
     ];
   }
 
   getAuth(){
     this.events.subscribe('user:loged', (token, data) => {
-      //get data from auth user
+      //get data from auth user Author: Argan (Ari Ganteng)
       this.token = token;
       this.info  = data;
-      this.photoUrl = `${this.basePhotoUrl}${data.uid}`;
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //add token to page :v author : Ari
+    this.nav.setRoot(page.component,{
+      token:this.token,
+    });
   }
+
+  logIn(){
+    this.nav.setRoot('LoginPage', {
+      page: 'HomePage',
+    });
+  }
+
 
 }
 
